@@ -1,0 +1,7 @@
+AI stands for Artificial Intelligence. It means making computers smart so they can think and make decisions like humans.
+
+Machine Learning is a type of AI where computers learn from data. Instead of being programmed with rules, they learn patterns automatically.
+
+Deep Learning uses layers of math called neural networks. It is used in image recognition, voice assistants, and language models.
+
+ChatGPT is an AI chatbot made by OpenAI. It uses a Large Language Model to understand and generate text.

@@ -1,0 +1,3 @@
+I am learning Python
+RAG systems are powerful
+Agents can use tools

@@ -1,0 +1,7 @@
+RAG stands for Retrieval Augmented Generation. It combines a vector database with a language model to answer questions from documents.
+
+ChromaDB is a vector database. It stores text as numbers called embeddings and finds similar text using math.
+
+Embeddings are numbers that represent the meaning of text. Similar sentences have similar numbers.
+
+FastAPI is used to build the backend of a RAG app. Streamlit is used to build the frontend chat interface.

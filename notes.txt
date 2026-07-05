@@ -1,0 +1,7 @@
+AI stands for Artificial Intelligence. It refers to the simulation of human intelligence in machines.
+
+RAG stands for Retrieval Augmented Generation. It combines a vector database with an LLM to answer questions from documents.
+
+FastAPI is a Python web framework used to build APIs quickly. It is commonly used to serve ML models.
+
+ChromaDB is a vector database that stores embeddings and allows similarity search.
