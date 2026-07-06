@@ -69,6 +69,69 @@ tools = [
 
 import json
 
+# Memory — conversation history
+conversation_history = []
+
+def chat_with_memory(user_message: str):
+    """Memory wala agent — har turn yaad rehta hai"""
+    
+    # User message history mein add karo
+    conversation_history.append({
+        "role": "user",
+        "content": user_message
+    })
+    
+    messages = [
+        {"role": "system", "content": "You are a helpful research agent with memory. Use web_search and write_file tools when needed."}
+    ] + conversation_history
+    
+    while True:
+        response = client.chat.completions.create(
+            model="meta-llama/llama-3.3-70b-instruct:free",
+            messages=messages,
+            tools=tools,
+            tool_choice="auto"
+        )
+        
+        msg = response.choices[0].message
+        messages.append(msg)
+        
+        if not msg.tool_calls:
+            # Agent ka jawab history mein save karo
+            conversation_history.append({
+                "role": "assistant",
+                "content": msg.content
+            })
+            return msg.content
+        
+        for tool_call in msg.tool_calls:
+            import json
+            name = tool_call.function.name
+            args = json.loads(tool_call.function.arguments)
+            
+            print(f"  → Tool: {name}")
+            
+            if name == "web_search":
+                result = web_search(args["query"])
+            elif name == "write_file":
+                result = write_file(args["filename"], args["content"])
+            else:
+                result = "Unknown tool"
+                
+            messages.append({
+                "role": "tool",
+                "tool_call_id": tool_call.id,
+                "content": result
+            })
+
+# Test — memory ke saath
+print("=== Memory Agent ===\n")
+r1 = chat_with_memory("What is FastAPI?")
+print(f"Turn 1: {r1}\n")
+
+r2 = chat_with_memory("Give me more detail about what you just explained")
+print(f"Turn 2: {r2}\n")
+
 def run_agent(task: str):
     print(f"\nTask: {task}")
     print("=" * 50)
